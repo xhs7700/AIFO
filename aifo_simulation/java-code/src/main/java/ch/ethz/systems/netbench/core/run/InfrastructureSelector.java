@@ -19,6 +19,7 @@ import ch.ethz.systems.netbench.ext.flowlet.IdentityFlowletIntermediaryGenerator
 import ch.ethz.systems.netbench.ext.flowlet.UniformFlowletIntermediaryGenerator;
 import ch.ethz.systems.netbench.ext.hybrid.EcmpThenValiantSwitchGenerator;
 import ch.ethz.systems.netbench.ext.valiant.RangeValiantSwitchGenerator;
+import ch.ethz.systems.netbench.xpt.aifo.ports.EAIFO.EAIFOOutputPortGenerator;
 import ch.ethz.systems.netbench.xpt.simple.simpleudp.SimpleUdpTransportLayerGenerator;
 import ch.ethz.systems.netbench.xpt.aifo.ports.AFQ.AFQOutputPortGenerator;
 // import ch.ethz.systems.netbench.xpt.sppifo.ports.CSFQ.CSFQOutputPortGenerator;
@@ -250,6 +251,14 @@ class InfrastructureSelector {
                         Simulator.getConfiguration().getIntegerPropertyOrFail("window_size"),
                         Simulator.getConfiguration().getIntegerPropertyOrFail("sample_count"),
                         (float) Simulator.getConfiguration().getDoublePropertyOrFail("k_value")
+                );
+            
+            case "eaifo":
+                return new EAIFOOutputPortGenerator(
+                        Simulator.getConfiguration().getLongPropertyOrFail("output_port_max_size_packets"),
+                        Simulator.getConfiguration().getIntegerPropertyOrFail("window_size"),
+                        Simulator.getConfiguration().getIntegerPropertyOrFail("sample_count"),
+                        Simulator.getConfiguration().getDoublePropertyOrFail("k_value")
                 );
             // case "csfq":
             //     return new CSFQOutputPortGenerator(
